@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>IIIDEALS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html { height:100%; background: linear-gradient(135deg,#FF5E5B,#FFB88C,#FFD97D);}
+body { margin:0; padding-top:80px; font-family:Arial,sans-serif;}
+h2,h3,p,li,label,a,button,input,select{direction:rtl;}
+/* Header */
+.a1{background:linear-gradient(90deg,#ff6600,#ff9966); color:white; padding:15px; font-size:24px; position:fixed; top:0; right:0; left:0; z-index:1000;}
+.a2{display:flex; justify-content:space-between; align-items:center;}
+.a3{font-size:26px; background:white; color:#ff6600; border:none; padding:8px; border-radius:6px; cursor:pointer; transition:0.3s;}
+.a3:hover{background:#ffe0b3;}
+.a4{flex-grow:1; text-align:center;}
+/* Side Menu */
+.b1{height:100%; width:250px; position:fixed; top:0; right:-250px; background:#222; transition:0.4s; padding-top:60px; z-index:2000;}
+.b2{display:block; width:100%; padding:15px; background:none; border:none; color:white; text-align:right; font-size:18px; cursor:pointer; transition:0.3s;}
+.b2:hover{background:#444;}
+.b3{position:absolute; top:10px; left:20px; font-size:30px; color:white; cursor:pointer;}
+/* Categories */
+.c1{display:none; padding:20px; background:rgba(255,255,255,0.9); margin:20px; border-radius:10px;}
+.c1.active{display:block;}
+.c2{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:15px;}
+.c3{background:white; padding:10px; border-radius:10px; position:relative; transition:all 0.4s ease;}
+.c3 img{width:100%; border-radius:8px; transition: transform 0.3s, filter 0.3s;}
+.c3 img:hover{transform:scale(1.03); filter:brightness(1.1);}
+.c4{color:green; font-weight:bold; margin-bottom:5px;}
+.c5{display:block; text-align:center; padding:8px; background:#ff6600; color:white; border-radius:6px; text-decoration:none; margin-bottom:5px; transition:background 0.3s, transform 0.2s;}
+.c5:hover{background:#ff9933; transform:translateY(-2px);}
+.c6{position:absolute; top:10px; left:10px; font-size:22px; color:#ccc; cursor:pointer; transition:color 0.3s, transform 0.3s;}
+.c6.liked{color:#ff66a3; transform:scale(1.3);}
+#x1,#x2{display:none; position:fixed; z-index:5000; left:0; top:0; width:100%; height:100%; overflow:auto; background:rgba(0,0,0,0.6);}
+#y1,#y2{background:white; margin:100px auto; padding:20px; border-radius:12px; width:90%; max-width:400px; text-align:right; box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+#y1 h2,#y2 h2{margin-top:0; text-align:center;}
+#y1 label,#y2 label, #y1 input,#y2 input,#y1 select,#y2 select{width:100%; padding:8px; margin-top:5px; border-radius:6px; border:1px solid #ccc;}
+#y1 button,#y2 button{margin-top:15px; width:100%; padding:10px; border:none; border-radius:6px; background:#ff6600; color:white; font-size:16px; cursor:pointer; transition:0.3s;}
+#y1 button:hover,#y2 button:hover{background:#ff9933;}
+@media(max-width:768px){.c2{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+
+<header class="a1">
+<div class="a2">
+    <span class="a3" onclick="f1()">☰</span>
+    <span class="a4">IIIDEALS</span>
+</div>
+</header>
+
+<div id="m1" class="b1">
+<span class="b3" onclick="f2()">×</span>
+<button class="b2" onclick="f3()">עמוד בית</button>
+<button class="b2" id="wBtn" onclick="f4()">בגדי נשים</button>
+<button class="b2" onclick="f5('m')">בגדי גברים</button>
+<button class="b2" onclick="f5('k')">לילדים</button>
+<button class="b2" onclick="f5('s')">נעליים</button>
+<button class="b2" onclick="f5('g')">משחקים</button>
+<button class="b2" onclick="f5('a')">אודות / תנאי שימוש</button>
+<button class="b2" onclick="f6()">מועדפים ❤️</button>
+</div>
+
+<section id="h" class="c1 active">
+<h2>ברוכים הבאים ל-IIIDEALS</h2>
+<p>כדי לראות קטגוריות ומוצרים – פתח את התפריט ☰</p>
+</section>
+
+<section id="w" class="c1"><h2>בגדי נשים</h2><div class="c2" id="wp"></div></section>
+<section id="m" class="c1"><h2>בגדי גברים</h2><div class="c2" id="mp">
+<div class="c3" data-id="mS1"><span class="c6" onclick="f7(this)">❤</span><img src="products/men1.jpg">
+<h3>מכנסי גברים קז'ואל</h3>
+<div class="c3desc">מכנסי קז'ואל ישרים וצרה, מותן אלסטי בסגנון ג'וגר, עיצוב קוריאני קלאסי.</div>
+<div class="c4">ILS 3.13</div><a class="c5" href="https://s.click.aliexpress.com/e/_c3DgPWHZ" target="_blank">לקנייה</a></div>
+</div></section>
+<section id="k" class="c1"><h2>לילדים</h2><div class="c2" id="kp"></div></section>
+<section id="s" class="c1"><h2>נעליים</h2><div class="c2" id="sp"></div></section>
+<section id="g" class="c1"><h2>משחקים</h2><div class="c2" id="gp"></div></section>
+<section id="f" class="c1"><h2>מועדפים ❤️</h2><div class="c2" id="fp"></div></section>
+
+<section id="a" class="c1">
+<h2>אודות / תנאי שימוש</h2>
+<ul>
+<li>אתר זה מציג מבצעים ומוצרים ממקורות חיצוניים בצורה נוחה וקלה לגלישה.</li>
+<li>כל המוצרים המסופקים באתר מגיעים מהספקים/יצרנים בלבד. האתר אינו אחראי על איכות, משלוחים, החזרות או שירות לקוחות.</li>
+<li>המחירים המוצגים באתר הם לצורך הצגה בלבד ולא כוללים משלוח. המחיר בפועל בעת הקנייה יכול להיות שונה.</li>
+<li>לחיצה על כפתור "לקנייה" מחברת את המשתמש ישירות לספק. האתר משתתף בתכניות אפיליאט ויכול להרוויח עמלה על קנייה.</li>
+<li>על ידי שימוש באתר, אתה מסכים שהתשלום והקנייה מתבצעים ישירות מול הספק בלבד.</li>
+<li>האתר אינו אוסף מידע אישי מהמשתמשים. כל הנתונים המתקבלים הם מהספקים או מהפעולות שהמשתמש מבצע בקישור אפיליאט בלבד.</li>
+<li>כל התמונות והטקסטים באתר הם לרשות האתר בלבד ואינם להעתקה או שימוש ללא אישור.</li>
+<li>לשאלות כלליות ניתן לפנות: b3b4b5123@gmail.com</li>
+</ul>
+</section>
+
+<div id="x2">
+<div id="y2">
+<h2>הכנס סיסמה</h2>
+<label>סיסמה:</label>
+<input type="password" id="pi">
+<button onclick="f8()">אישור</button>
+</div>
+</div>
+
+<div id="x1">
+<div id="y1">
+<h2>הוספת מוצר חדש</h2>
+<label>קטגוריה:</label>
+<select id="mc">
+<option value="w">נשים</option>
+<option value="m">גברים</option>
+<option value="k">ילדים</option>
+<option value="s">נעליים</option>
+<option value="g">משחקים</option>
+</select>
+<label>שם מוצר:</label><input type="text" id="mn">
+<label>תיאור מוצר:</label><input type="text" id="md">
+<label>מחיר:</label><input type="text" id="mpc">
+<label>קישור לקנייה:</label><input type="text" id="ml">
+<label>נתיב לתמונה:</label><input type="text" id="mi">
+<button onclick="f9()">הוסף מוצר</button>
+</div>
+</div>
+
+<script>
+let favs={}; let wC=0;
+const catMap={w:'wp', m:'mp', k:'kp', s:'sp', g:'gp'};
+
+function f1(){document.getElementById('m1').style.right='0';}
+function f2(){document.getElementById('m1').style.right='-250px';}
+function f3(){document.querySelectorAll('.c1').forEach(c=>c.classList.remove('active')); document.getElementById('h').classList.add('active'); f2(); window.scrollTo({top:0, behavior:'smooth'});}
+function f5(id){document.querySelectorAll('.c1').forEach(c=>c.classList.remove('active')); document.getElementById(id).classList.add('active'); f2(); window.scrollTo({top:0, behavior:'smooth'});}
+function f6(){f5('f');}
+
+function f7(h){
+    const p=h.parentElement; const id=p.dataset.id; const c=document.getElementById('fp');
+    if(favs[id]){const fp=c.querySelector(`[data-id="${id}"]`); fp.style.opacity=0; fp.style.transform="translateY(20px)";
+    setTimeout(()=>{fp.remove(); delete favs[id];},400); h.classList.remove('liked');} 
+    else{
+        h.classList.add('liked'); const f=p.cloneNode(true); const r=p.getBoundingClientRect();
+        f.style.position='absolute'; f.style.top=r.top+window.scrollY+'px'; f.style.left=r.left+window.scrollX+'px'; f.style.width=r.width+'px'; f.style.zIndex=5000;
+        f.classList.add('fly'); document.body.appendChild(f);
+        const fr=document.getElementById('fp').getBoundingClientRect();
+        setTimeout(()=>{f.style.top=fr.top+window.scrollY+'px'; f.style.left=fr.left+window.scrollX+'px'; f.style.width='200px';},10);
+        setTimeout(()=>{f.remove(); const n=p.cloneNode(true); n.querySelector('.c6').classList.add('liked'); n.querySelector('.c6').onclick=()=>f7(n.querySelector('.c6')); c.appendChild(n); favs[id]=n; f5('f');},800);
+    }
+}
+
+function f4(){wC++; if(wC>=5){wC=0; document.getElementById('x2').style.display='block';} else {f5('w');}}
+
+function f8(){ 
+    const v=document.getElementById('pi').value; document.getElementById('pi').value=''; document.getElementById('x2').style.display='none';
+    const hPass=String.fromCharCode(57,49,48,53); // 9105 מוסתרת
+    if(v===hPass){document.getElementById('x1').style.display='block';}
+    else{f3(); alert('סיסמה שגויה! חזרת לדף הבית');}
+}
+
+function f9(){
+    const cat=document.getElementById('mc').value;
+    const name=document.getElementById('mn').value;
+    const desc=document.getElementById('md').value;
+    const price=document.getElementById('mpc').value;
+    const link=document.getElementById('ml').value;
+    const img=document.getElementById('mi').value;
+    if(!name||!img){alert('יש למלא לפחות שם ונתיב תמונה'); return;}
+    const p=document.createElement('div'); p.className='c3'; p.dataset.id=cat+Date.now();
+    p.innerHTML=`<span class="c6" onclick="f7(this)">❤</span><img src="${img}"><h3>${name}</h3><div class="c3desc">${desc}</div><div class="c4">${price}</div><a class="c5" href="${link}" target="_blank">לקנייה</a>`;
+    document.getElementById(catMap[cat]).appendChild(p);
+    document.getElementById('x1').style.display='none';
+    document.getElementById('mn').value=''; document.getElementById('md').value=''; document.getElementById('mpc').value=''; document.getElementById('ml').value=''; document.getElementById('mi').value='';
+    alert('המוצר נוסף בהצלחה!'); f5(cat);
+}
+
+window.onclick=function(e){[document.getElementById('x1'),document.getElementById('x2')].forEach(m=>{if(e.target==m)m.style.display='none';});}
+</script>
+</body>
+</html>
