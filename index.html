@@ -7,82 +7,103 @@
 <style>
 html { height:100%; background: linear-gradient(135deg,#FF5E5B,#FFB88C,#FFD97D);}
 body { margin:0; padding-top:80px; font-family:Arial,sans-serif;}
-h2,h3,p,li,label,a,button,input,select{direction:rtl;}
+
 /* Header */
-.a1{background:linear-gradient(90deg,#ff6600,#ff9966); color:white; padding:15px; font-size:24px; position:fixed; top:0; right:0; left:0; z-index:1000;}
-.a2{display:flex; justify-content:space-between; align-items:center;}
-.a3{font-size:26px; background:white; color:#ff6600; border:none; padding:8px; border-radius:6px; cursor:pointer; transition:0.3s;}
-.a3:hover{background:#ffe0b3;}
-.a4{flex-grow:1; text-align:center;}
+header {background:linear-gradient(90deg,#ff6600,#ff9966); color:white; padding:15px; font-size:24px; position:fixed; top:0; right:0; left:0; z-index:1000;}
+.header-container {display:flex; justify-content:space-between; align-items:center;}
+.menu-button {font-size:26px; background:white; color:#ff6600; border:none; padding:8px; border-radius:6px; cursor:pointer; transition:0.3s;}
+.menu-button:hover {background:#ffe0b3;}
+.header-title {flex-grow:1; text-align:center;}
+
 /* Side Menu */
-.b1{height:100%; width:250px; position:fixed; top:0; right:-250px; background:#222; transition:0.4s; padding-top:60px; z-index:2000;}
-.b2{display:block; width:100%; padding:15px; background:none; border:none; color:white; text-align:right; font-size:18px; cursor:pointer; transition:0.3s;}
-.b2:hover{background:#444;}
-.b3{position:absolute; top:10px; left:20px; font-size:30px; color:white; cursor:pointer;}
+.side-menu {height:100%; width:250px; position:fixed; top:0; right:-250px; background:#222; transition:0.4s; padding-top:60px; z-index:2000;}
+.side-menu button {display:block; width:100%; padding:15px; background:none; border:none; color:white; text-align:right; font-size:18px; cursor:pointer; transition:0.3s;}
+.side-menu button:hover {background:#444;}
+.close-btn {position:absolute; top:10px; left:20px; font-size:30px; color:white; cursor:pointer;}
+
 /* Categories */
-.c1{display:none; padding:20px; background:rgba(255,255,255,0.9); margin:20px; border-radius:10px;}
-.c1.active{display:block;}
-.c2{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:15px;}
-.c3{background:white; padding:10px; border-radius:10px; position:relative; transition:all 0.4s ease;}
-.c3 img{width:100%; border-radius:8px; transition: transform 0.3s, filter 0.3s;}
-.c3 img:hover{transform:scale(1.03); filter:brightness(1.1);}
-.c4{color:green; font-weight:bold; margin-bottom:5px;}
-.c5{display:block; text-align:center; padding:8px; background:#ff6600; color:white; border-radius:6px; text-decoration:none; margin-bottom:5px; transition:background 0.3s, transform 0.2s;}
-.c5:hover{background:#ff9933; transform:translateY(-2px);}
-.c6{position:absolute; top:10px; left:10px; font-size:22px; color:#ccc; cursor:pointer; transition:color 0.3s, transform 0.3s;}
-.c6.liked{color:#ff66a3; transform:scale(1.3);}
-#x1,#x2{display:none; position:fixed; z-index:5000; left:0; top:0; width:100%; height:100%; overflow:auto; background:rgba(0,0,0,0.6);}
-#y1,#y2{background:white; margin:100px auto; padding:20px; border-radius:12px; width:90%; max-width:400px; text-align:right; box-shadow:0 5px 15px rgba(0,0,0,0.3);}
-#y1 h2,#y2 h2{margin-top:0; text-align:center;}
-#y1 label,#y2 label, #y1 input,#y2 input,#y1 select,#y2 select{width:100%; padding:8px; margin-top:5px; border-radius:6px; border:1px solid #ccc;}
-#y1 button,#y2 button{margin-top:15px; width:100%; padding:10px; border:none; border-radius:6px; background:#ff6600; color:white; font-size:16px; cursor:pointer; transition:0.3s;}
-#y1 button:hover,#y2 button:hover{background:#ff9933;}
-@media(max-width:768px){.c2{grid-template-columns:repeat(2,1fr);}}
+.category {display:none; padding:20px; background:rgba(255,255,255,0.9); margin:20px; border-radius:10px;}
+.category.active {display:block;}
+.products {display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:15px;}
+.product {background:white; padding:10px; border-radius:10px; position:relative; transition:all 0.4s ease;}
+.product img {width:100%; border-radius:8px; transition: transform 0.3s, filter 0.3s;}
+.product img:hover {transform:scale(1.03); filter:brightness(1.1);}
+.price {color:green; font-weight:bold; margin-bottom:5px;}
+.buy-btn {display:block; text-align:center; padding:8px; background:#ff6600; color:white; border-radius:6px; text-decoration:none; margin-bottom:5px; transition:background 0.3s, transform 0.2s;}
+.buy-btn:hover {background:#ff9933; transform:translateY(-2px);}
+.heart {position:absolute; top:10px; left:10px; font-size:22px; color:#ccc; cursor:pointer; transition:color 0.3s, transform 0.3s;}
+.heart.liked {color:#ff66a3; transform:scale(1.3);}
+
+/* Modal */
+#addModal, #passwordModal {display:none; position:fixed; z-index:5000; left:0; top:0; width:100%; height:100%; overflow:auto; background:rgba(0,0,0,0.6);}
+#modalContent, #passwordContent {background:white; margin:100px auto; padding:20px; border-radius:12px; width:90%; max-width:400px; text-align:right; box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+#modalContent h2, #passwordContent h2 {margin-top:0; text-align:center;}
+#modalContent label, #passwordContent label {display:block; margin-top:10px;}
+#modalContent input, #passwordContent input, #modalContent select {width:100%; padding:8px; margin-top:5px; border-radius:6px; border:1px solid #ccc;}
+#modalContent button, #passwordContent button {margin-top:15px; width:100%; padding:10px; border:none; border-radius:6px; background:#ff6600; color:white; font-size:16px; cursor:pointer; transition:0.3s;}
+#modalContent button:hover, #passwordContent button:hover {background:#ff9933;}
+
+/* Media */
+@media(max-width:768px){.products{grid-template-columns:repeat(2,1fr);}}
 </style>
 </head>
 <body>
 
-<header class="a1">
-<div class="a2">
-    <span class="a3" onclick="f1()">☰</span>
-    <span class="a4">IIIDEALS</span>
+<header>
+<div class="header-container">
+    <span class="menu-button" onclick="openMenu()">☰</span>
+    <span class="header-title">IIIDEALS</span>
 </div>
 </header>
 
-<div id="m1" class="b1">
-<span class="b3" onclick="f2()">×</span>
-<button class="b2" onclick="f3()">עמוד בית</button>
-<button class="b2" id="wBtn" onclick="f4()">בגדי נשים</button>
-<button class="b2" onclick="f5('m')">בגדי גברים</button>
-<button class="b2" onclick="f5('k')">לילדים</button>
-<button class="b2" onclick="f5('s')">נעליים</button>
-<button class="b2" onclick="f5('g')">משחקים</button>
-<button class="b2" onclick="f5('a')">אודות / תנאי שימוש</button>
-<button class="b2" onclick="f6()">מועדפים ❤️</button>
+<div id="menu" class="side-menu">
+<span class="close-btn" onclick="closeMenu()">×</span>
+<button onclick="showHome()">עמוד בית</button>
+<button id="womenBtn" onclick="handleWomenClick()">בגדי נשים</button>
+<button onclick="showCategory('men')">בגדי גברים</button>
+<button onclick="showCategory('kids')">לילדים</button>
+<button onclick="showCategory('shoes')">נעליים</button>
+<button onclick="showCategory('games')">משחקים</button>
+<button onclick="showCategory('about')">אודות / תנאי שימוש</button>
+<button onclick="showFavorites()">מועדפים ❤️</button>
 </div>
 
-<section id="h" class="c1 active">
+<section id="home" class="category active">
 <h2>ברוכים הבאים ל-IIIDEALS</h2>
 <p>כדי לראות קטגוריות ומוצרים – פתח את התפריט ☰</p>
 </section>
 
-<section id="w" class="c1"><h2>בגדי נשים</h2><div class="c2" id="wp"></div></section>
-<section id="m" class="c1"><h2>בגדי גברים</h2><div class="c2" id="mp">
-<div class="c3" data-id="mS1"><span class="c6" onclick="f7(this)">❤</span><img src="S3c5c655a503d45f0b25b8a50316012180.jpg.avif">
-<h3>כפפות אופנוע</h3>
-<div class="c3desc">כפפות אופנוע ואופני שטח UFO Almst, מתאימות לגברים ונשים. כפפות רכות ומאווררות ל־Mountain Bike, BMX, ATV ו־UTV, אידיאליות למוטוקרוס ולמרוצי שטח.</div>
-<div class="c4">ILS 22.21</div><a class="c5" href="https://s.click.aliexpress.com/e/_c4MvzoKL" target="_blank">לקנייה</a></div>
-    <div class="c3" data-id="mS2"><span class="c6" onclick="f7(this)">❤</span><img src="S3c5c655a503d45f0b25b8a50316012180.jpg.avif">
-<h3>כפפות אופנוע</h3>
-<div class="c3desc">כפפות אופנוע ואופני שטח UFO Almst, מתאימות לגברים ונשים. כפפות רכות ומאווררות ל־Mountain Bike, BMX, ATV ו־UTV, אידיאליות למוטוקרוס ולמרוצי שטח.</div>
-<div class="c4">ILS 22.21</div><a class="c5" href="https://s.click.aliexpress.com/e/_c4MvzoKL" target="_blank">לקנייה</a></div>
-</div></section>
-<section id="k" class="c1"><h2>לילדים</h2><div class="c2" id="kp"></div></section>
-<section id="s" class="c1"><h2>נעליים</h2><div class="c2" id="sp"></div></section>
-<section id="g" class="c1"><h2>משחקים</h2><div class="c2" id="gp"></div></section>
-<section id="f" class="c1"><h2>מועדפים ❤️</h2><div class="c2" id="fp"></div></section>
+<section id="women" class="category"><h2>בגדי נשים</h2><div class="products" id="womenProducts"></div></section>
+<section id="men" class="category"><h2>בגדי גברים</h2>
+<div class="products" id="menProducts">
+  <div class="product" data-id="menSample1">
+    <span class="heart" onclick="toggleFavorite(this)">❤</span>
+    <img src="products/men1.jpg">
+    <h3>מכנסי גברים קז'ואל</h3>
+    <div class="description">מכנסי קז'ואל ישרים וצרה, מותן אלסטי בסגנון ג'וגר, עיצוב קוריאני קלאסי.</div>
+    <div class="price">ILS 3.13</div>
+    <a class="buy-btn" href="https://s.click.aliexpress.com/e/_c3DgPWHZ" target="_blank">לקנייה</a>
+  </div>
 
-<section id="a" class="c1">
+  <!-- מוצר דוגמה -->
+  <div class="product" data-id="menSample2">
+    <span class="heart" onclick="toggleFavorite(this)">❤</span>
+    <img src="products/men2.jpg">
+    <h3>חולצת פולו קלאסית</h3>
+    <div class="description">חולצת פולו איכותית מבד נעים, צבע כחול כהה, מתאימה לכל ימות השבוע.</div>
+    <div class="price">ILS 5.49</div>
+    <a class="buy-btn" href="https://s.click.aliexpress.com/e/_c3DgPWHZ" target="_blank">לקנייה</a>
+  </div>
+
+</div>
+</section>
+<section id="kids" class="category"><h2>לילדים</h2><div class="products" id="kidsProducts"></div></section>
+<section id="shoes" class="category"><h2>נעליים</h2><div class="products" id="shoesProducts"></div></section>
+<section id="games" class="category"><h2>משחקים</h2><div class="products" id="gamesProducts"></div></section>
+<section id="favorites" class="category"><h2>מועדפים ❤️</h2><div class="products" id="favoritesContainer"></div></section>
+
+<!-- About Section -->
+<section id="about" class="category">
 <h2>אודות / תנאי שימוש</h2>
 <ul>
 <li>אתר זה מציג מבצעים ומוצרים ממקורות חיצוניים בצורה נוחה וקלה לגלישה.</li>
@@ -96,33 +117,122 @@ h2,h3,p,li,label,a,button,input,select{direction:rtl;}
 </ul>
 </section>
 
-<div id="x2">
-<div id="y2">
-<h2>הכנס סיסמה</h2>
-<label>סיסמה:</label>
-<input type="password" id="pi">
-<button onclick="f8()">אישור</button>
-</div>
+<!-- Password Modal -->
+<div id="passwordModal">
+  <div id="passwordContent">
+    <h2>הכנס סיסמה</h2>
+    <label>סיסמה:</label>
+    <input type="password" id="passwordInput">
+    <button onclick="checkPassword()">אישור</button>
+  </div>
 </div>
 
-<div id="x1">
-<div id="y1">
-<h2>הוספת מוצר חדש</h2>
-<label>קטגוריה:</label>
-<select id="mc">
-<option value="w">נשים</option>
-<option value="m">גברים</option>
-<option value="k">ילדים</option>
-<option value="s">נעליים</option>
-<option value="g">משחקים</option>
-</select>
-<label>שם מוצר:</label><input type="text" id="mn">
-<label>תיאור מוצר:</label><input type="text" id="md">
-<label>מחיר:</label><input type="text" id="mpc">
-<label>קישור לקנייה:</label><input type="text" id="ml">
-<label>נתיב לתמונה:</label><input type="text" id="mi">
-<button onclick="f9()">הוסף מוצר</button>
+<!-- Add Product Modal -->
+<div id="addModal">
+  <div id="modalContent">
+    <h2>הוספת מוצר חדש</h2>
+    <label>קטגוריה:</label>
+    <select id="modalCategory">
+      <option value="women">נשים</option>
+      <option value="men">גברים</option>
+      <option value="kids">ילדים</option>
+      <option value="shoes">נעליים</option>
+      <option value="games">משחקים</option>
+    </select>
+    <label>שם מוצר:</label><input type="text" id="modalName">
+    <label>תיאור מוצר:</label><input type="text" id="modalDesc">
+    <label>מחיר:</label><input type="text" id="modalPrice">
+    <label>קישור לקנייה:</label><input type="text" id="modalLink">
+    <label>נתיב לתמונה:</label><input type="text" id="modalImg">
+    <button onclick="addProduct()">הוסף מוצר</button>
+  </div>
 </div>
+
+<script>
+let favorites={};
+let womenClickCount=0;
+const categoriesMap={women:'womenProducts', men:'menProducts', kids:'kidsProducts', shoes:'shoesProducts', games:'gamesProducts'};
+
+function openMenu(){ document.getElementById("menu").style.right="0"; }
+function closeMenu(){ document.getElementById("menu").style.right="-250px"; }
+function showCategory(id){ document.querySelectorAll('.category').forEach(c=>c.classList.remove('active')); document.getElementById(id).classList.add('active'); closeMenu(); window.scrollTo({top:0, behavior:'smooth'}); }
+function showHome(){ showCategory('home'); }
+function showFavorites(){ showCategory('favorites'); }
+
+function toggleFavorite(heart){
+    const product=heart.parentElement; const id=product.dataset.id; const container=document.getElementById('favoritesContainer');
+    if(favorites[id]){
+        const favProd=container.querySelector(`[data-id="${id}"]`);
+        favProd.style.opacity=0; favProd.style.transform="translateY(20px)";
+        setTimeout(()=>{favProd.remove(); delete favorites[id];},400);
+        heart.classList.remove('liked');
+    } else {
+        heart.classList.add('liked');
+        const fly=product.cloneNode(true);
+        const rect=product.getBoundingClientRect();
+        fly.style.position='absolute'; fly.style.top=rect.top+window.scrollY+'px';
+        fly.style.left=rect.left+window.scrollX+'px';
+        fly.style.width=rect.width+'px'; fly.style.zIndex=5000; fly.classList.add('fly');
+        document.body.appendChild(fly);
+        const favRect=document.getElementById('favoritesContainer').getBoundingClientRect();
+        setTimeout(()=>{fly.style.top=favRect.top+window.scrollY+'px'; fly.style.left=favRect.left+window.scrollX+'px'; fly.style.width='200px';},10);
+        setTimeout(()=>{
+            fly.remove();
+            const newFav=product.cloneNode(true);
+            newFav.querySelector('.heart').classList.add('liked');
+            newFav.querySelector('.heart').onclick=()=>toggleFavorite(newFav.querySelector('.heart'));
+            container.appendChild(newFav); favorites[id]=newFav; showFavorites();
+        },800);
+    }
+}
+
+// Admin Password & Add Product
+function handleWomenClick(){
+    womenClickCount++;
+    if(womenClickCount>=5){ womenClickCount=0;
+        document.getElementById('passwordModal').style.display='block';
+    } else { showCategory('women'); }
+}
+
+function checkPassword(){
+    const val=document.getElementById('passwordInput').value;
+    document.getElementById('passwordInput').value='';
+    document.getElementById('passwordModal').style.display='none';
+    if(val==='9105'){ document.getElementById('addModal').style.display='block'; }
+    else{ showHome(); alert('סיסמה שגויה! חזרת לדף הבית'); }
+}
+
+function addProduct(){
+    const cat=document.getElementById('modalCategory').value;
+    const name=document.getElementById('modalName').value;
+    const desc=document.getElementById('modalDesc').value;
+    const price=document.getElementById('modalPrice').value;
+    const link=document.getElementById('modalLink').value;
+    const img=document.getElementById('modalImg').value;
+    if(!name || !img){ alert("יש למלא לפחות שם ונתיב תמונה"); return; }
+    const prod=document.createElement('div');
+    prod.className='product'; prod.dataset.id=cat+Date.now();
+    prod.innerHTML=`<span class="heart" onclick="toggleFavorite(this)">❤</span>
+        <img src="${img}">
+        <h3>${name}</h3>
+        <div class="description">${desc}</div>
+        <div class="price">${price}</div>
+        <a class="buy-btn" href="${link}" target="_blank">לקנייה</a>`;
+    document.getElementById(categoriesMap[cat]).appendChild(prod);
+    document.getElementById('addModal').style.display='none';
+    document.getElementById('modalName').value=''; document.getElementById('modalDesc').value='';
+    document.getElementById('modalPrice').value=''; document.getElementById('modalLink').value=''; document.getElementById('modalImg').value='';
+    alert("המוצר נוסף בהצלחה!"); showCategory(cat);
+}
+
+// Close modals if clicked outside
+window.onclick=function(event){
+    const modals=[document.getElementById('addModal'),document.getElementById('passwordModal')];
+    modals.forEach(modal=>{if(event.target==modal){modal.style.display='none';}});
+}
+</script>
+</body>
+</html></div>
 </div>
 
 <script>
